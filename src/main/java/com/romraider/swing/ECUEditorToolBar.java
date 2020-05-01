@@ -50,6 +50,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
     private final JButton saveImage = new JButton();
     private final JButton refreshImage = new JButton();
     private final JButton closeImage = new JButton();
+    private final JButton openECUFlash = new JButton();
 
     public ECUEditorToolBar(String name) {
         super(name);
@@ -65,6 +66,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         this.add(saveImage);
         this.add(closeImage);
         this.add(refreshImage);
+        this.add(openECUFlash);
 
         openImage.setMaximumSize(new Dimension(58, 50));
         openImage.setBorder(createLineBorder(new Color(150, 150, 150), 0));
@@ -74,6 +76,8 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         closeImage.setBorder(createLineBorder(new Color(150, 150, 150), 0));
         refreshImage.setMaximumSize(new Dimension(50, 50));
         refreshImage.setBorder(createLineBorder(new Color(150, 150, 150), 0));
+        //openECUFlash.setMaximumSize(new Dimension(50, 50));
+        //openECUFlash.setBorder(createLineBorder(new Color(150, 150, 150), 0));
 
         this.updateButtons();
 
@@ -81,6 +85,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         saveImage.addActionListener(this);
         closeImage.addActionListener(this);
         refreshImage.addActionListener(this);
+        openECUFlash.addActionListener(this);
     }
 
     public void updateIcons() {
@@ -89,6 +94,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         saveImage.setIcon(rescaleImageIcon(new ImageIcon(getClass().getResource("/graphics/icon-save.png")), iconScale));
         refreshImage.setIcon(rescaleImageIcon(new ImageIcon(getClass().getResource("/graphics/icon-refresh.png")), iconScale));
         closeImage.setIcon(rescaleImageIcon(new ImageIcon( getClass().getResource("/graphics/icon-close.png")), iconScale));
+        openECUFlash.setIcon(rescaleImageIcon(new ImageIcon( getClass().getResource("/graphics/ecu_flash.png")), iconScale));
         repaint();
     }
 
@@ -113,15 +119,19 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
                 rb.getString("REFRESH"), file));
         closeImage.setToolTipText(MessageFormat.format(
                 rb.getString("CLOSE"), file));
+        /*openECUFlash.setToolTipText(MessageFormat.format(
+                rb.getString("OPENINECUFLASH"), file));
 
         if ("".equals(file)) {
             saveImage.setEnabled(false);
             refreshImage.setEnabled(false);
             closeImage.setEnabled(false);
+            openECUFlash.setEnabled(false);
         } else {
             saveImage.setEnabled(true);
             refreshImage.setEnabled(true);
             closeImage.setEnabled(true);
+            openECUFlash.setEnabled(true);
         }
         revalidate();
     }
@@ -155,6 +165,8 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
                         getSettings().getSupportURL()),
                         rb.getString("EXCEPTION"), JOptionPane.ERROR_MESSAGE);
             }
+        }
+        else if (e.getSource() == openECUFlash) {
         }
     }
 

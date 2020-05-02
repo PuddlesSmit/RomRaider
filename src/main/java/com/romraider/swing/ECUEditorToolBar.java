@@ -27,6 +27,7 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -76,8 +77,8 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         closeImage.setBorder(createLineBorder(new Color(150, 150, 150), 0));
         refreshImage.setMaximumSize(new Dimension(50, 50));
         refreshImage.setBorder(createLineBorder(new Color(150, 150, 150), 0));
-        //openECUFlash.setMaximumSize(new Dimension(50, 50));
-        //openECUFlash.setBorder(createLineBorder(new Color(150, 150, 150), 0));
+        openECUFlash.setMaximumSize(new Dimension(50, 50));
+        openECUFlash.setBorder(createLineBorder(new Color(150, 150, 150), 0));
 
         this.updateButtons();
 
@@ -120,7 +121,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         closeImage.setToolTipText(MessageFormat.format(
                 rb.getString("CLOSE"), file));
         /*openECUFlash.setToolTipText(MessageFormat.format(
-                rb.getString("OPENINECUFLASH"), file));
+                rb.getString("OPENINECUFLASH"), file));*/
 
         if ("".equals(file)) {
             saveImage.setEnabled(false);
@@ -167,6 +168,17 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
             }
         }
         else if (e.getSource() == openECUFlash) {
+        	 try
+             { 
+                 String command = "C:\\Program Files (x86)"+ 
+                      "\\OpenEcu\\EcuFlash\\ecuflash.exe";
+                 Runtime run  = Runtime.getRuntime(); 
+                 Process proc = run.exec(command); 
+             } 
+             catch (IOException e1) 
+             { 
+                 e1.printStackTrace(); 
+             } 
         }
     }
 

@@ -68,6 +68,8 @@ public class SettingsForm extends JFrame implements MouseListener {
         warningColor.addMouseListener(this);
         liveValueColor.addMouseListener(this);
         curLiveValueColor.addMouseListener(this);
+        
+        btnEcuFlashPath.addMouseListener(this);
 
         btnOk.addMouseListener(this);
         btnApply.addMouseListener(this);
@@ -226,6 +228,9 @@ public class SettingsForm extends JFrame implements MouseListener {
         defaultScale = new javax.swing.JTextField();
         comboBoxDefaultScale = new javax.swing.JComboBox();
         cbScaleHeaderAndData = new javax.swing.JCheckBox();
+        EcuFlashPath = new javax.swing.JTextField();
+        lblEcuFlashPath = new javax.swing.JLabel();
+        btnEcuFlashPath = new javax.swing.JButton();
 
         clipboardButtonGroup = new ButtonGroup();
         rdbtnDefault = new JRadioButton(rb.getString("RRDEFAULT"));
@@ -577,13 +582,14 @@ public class SettingsForm extends JFrame implements MouseListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initTabs() {
-
         JPanel panelUISettings = new JPanel();
         panelUISettings.setBorder(new TitledBorder(UIManager.getBorder(
                 "TitledBorder.border"),
                 rb.getString("UISETTINGS"),
                 TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        
         // Init Default Tab Panel
+        
         GroupLayout jPanelDefaultLayout = new GroupLayout(jPanelDefault);
         jPanelDefaultLayout.setHorizontalGroup(
                 jPanelDefaultLayout.createParallelGroup(Alignment.LEADING)
@@ -594,7 +600,11 @@ public class SettingsForm extends JFrame implements MouseListener {
                                 .addComponent(obsoleteWarning)
                                 .addComponent(calcConflictWarning)
                                 .addComponent(localeFormatCheckBox)
-                                .addComponent(debug))
+                                .addComponent(debug)
+                                .addComponent(lblEcuFlashPath)
+                        		.addComponent(EcuFlashPath)
+                        		.addComponent(btnEcuFlashPath)
+                                )
                                 .addContainerGap())
                 );
         jPanelDefaultLayout.setVerticalGroup(
@@ -609,18 +619,28 @@ public class SettingsForm extends JFrame implements MouseListener {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(debug)
                         .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(lblEcuFlashPath)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(EcuFlashPath)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(btnEcuFlashPath)
+                        .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(panelUISettings, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(267, Short.MAX_VALUE))
                 );
         chckbxOpenRomNode = new JCheckBox(rb.getString("ORNE"));
 
         chckbxShowTableToolbar = new JCheckBox(rb.getString("STTB"));
+        
+        lblEcuFlashPath.setText(rb.getString("ECUFLASHLOC"));
+        btnEcuFlashPath.setText(rb.getString("ECUFLASHBRWSE"));
 
         panelTreeSettings = new JPanel();
         panelTreeSettings.setBorder(new TitledBorder(null, rb.getString("RTS"),
                 TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
         chckbxOpenTablesAt = new JCheckBox(rb.getString("AOA00"));
+        
         GroupLayout gl_panelUISettings = new GroupLayout(panelUISettings);
         gl_panelUISettings.setHorizontalGroup(
                 gl_panelUISettings.createParallelGroup(Alignment.LEADING)
@@ -939,7 +959,11 @@ public class SettingsForm extends JFrame implements MouseListener {
             if (color != null) {
                 warningColor.setBackground(color);
             }
-        } else if (e.getSource() == btnApply) {
+        } else if (e.getSource() == btnEcuFlashPath) {
+            //Open path window for lookup
+        	openPath();
+        	System.out.println("Button Clicked");
+        }  else if (e.getSource() == btnApply) {
             applySettings();
         } else if (e.getSource() == btnOk) {
             // Apply settings to Settings object.
@@ -1029,12 +1053,25 @@ public class SettingsForm extends JFrame implements MouseListener {
             }
         }
     }
+    
+    public void openPath() {
+        JFileChooser fc = new JFileChooser();
+
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            fileNames = fc.getSelectedFile().getAbsolutePath();
+            updateEcuFlashPath();
+        }
+    }
+    
+    public void updateEcuFlashPath() {
+    	EcuFlashPath.setText(fileNames);
+    }
 
     public void applySettings() {
         try {
             Integer.parseInt(cellHeight.getText());
         } catch (NumberFormatException ex) {
-            // number formatted imporperly, reset
+            // number formatted improperly, reset
             cellHeight.setText((int) (getSettings().getCellSize().getHeight()) + "");
         }
         try {
@@ -1180,6 +1217,8 @@ public class SettingsForm extends JFrame implements MouseListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private String fileNames;
+    
     private javax.swing.JLabel axisColor;
     private javax.swing.JButton btnAddAssocs;
     private javax.swing.JButton btnApply;
@@ -1251,4 +1290,7 @@ public class SettingsForm extends JFrame implements MouseListener {
     private javax.swing.JCheckBox cbScaleHeaderAndData;
     private javax.swing.JCheckBox localeFormatCheckBox;
     private String oldLocale;
+    private javax.swing.JTextField EcuFlashPath;
+    private javax.swing.JLabel lblEcuFlashPath;
+    private javax.swing.JButton btnEcuFlashPath;
 }

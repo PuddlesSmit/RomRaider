@@ -42,6 +42,7 @@ import com.romraider.logger.external.phidget.interfacekit.io.IntfKitSensor;
 public class Settings implements Serializable {
 
     private static final long serialVersionUID = 1026542922680475190L;
+    
 
     /* String Format Settings */
     public static final String NEW_LINE = System.getProperty("line.separator");
@@ -181,6 +182,7 @@ public class Settings implements Serializable {
     private boolean obsoleteWarning = true;
     private boolean calcConflictWarning = true;
     private boolean debug;
+    private static String ecuFlashPath;
     private int userLevel = 1;
     private boolean saveDebugTables = true;
     private boolean displayHighTables = true;
@@ -204,7 +206,7 @@ public class Settings implements Serializable {
     private int tableClickCount = 1; // number of clicks to open table
     private int tableClickBehavior = 0; // TableTreeNode click behavior. 0=open/close frame, 1=open/focus frame
     private boolean colorAxis = false;
-
+    
     private String loggerPort;
     private String loggerPortDefault;
     private static String loggerProtocol = SSM;
@@ -362,6 +364,14 @@ public class Settings implements Serializable {
         this.tableFont = tableFont;
     }
 
+    public String getEcuFlashPath() {
+        return ecuFlashPath;
+    }
+    
+    public void setEcuFlashPath(String value) {
+        Settings.ecuFlashPath = value;
+    }
+    
     public boolean isObsoleteWarning() {
         return obsoleteWarning;
     }

@@ -170,8 +170,7 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
         else if (e.getSource() == openEcuFlash) {
         	 try
              { 
-                 String command = "C:\\Program Files (x86)"+ 
-                      "\\OpenEcu\\EcuFlash\\ecuflash.exe";
+                 String command = getSettings().getEcuFlashPath();
                  Runtime run  = Runtime.getRuntime(); 
                  Process proc = run.exec(command); 
              } 

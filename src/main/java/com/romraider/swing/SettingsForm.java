@@ -114,7 +114,8 @@ public class SettingsForm extends JFrame implements MouseListener {
         liveValueColor.setToolTipText(rb.getString("CLROVERLAYV"));
         curLiveValueColor.setBackground(settings.getCurLiveValueColor());
         curLiveValueColor.setToolTipText(rb.getString("CLROVERLAYLIVE"));
-
+        System.out.println("Loc:" + settings.getEcuFlashPath());
+        ecuFlashPath.setText(settings.getEcuFlashPath());
         cellWidth.setText(((int) settings.getCellSize().getWidth()) + "");
         cellHeight.setText(((int) settings.getCellSize().getHeight()) + "");
 
@@ -228,7 +229,7 @@ public class SettingsForm extends JFrame implements MouseListener {
         defaultScale = new javax.swing.JTextField();
         comboBoxDefaultScale = new javax.swing.JComboBox();
         cbScaleHeaderAndData = new javax.swing.JCheckBox();
-        EcuFlashPath = new javax.swing.JTextField();
+        ecuFlashPath = new javax.swing.JTextField();
         lblEcuFlashPath = new javax.swing.JLabel();
         btnEcuFlashPath = new javax.swing.JButton();
 
@@ -602,7 +603,7 @@ public class SettingsForm extends JFrame implements MouseListener {
                                 .addComponent(localeFormatCheckBox)
                                 .addComponent(debug)
                                 .addComponent(lblEcuFlashPath)
-                        		.addComponent(EcuFlashPath)
+                        		.addComponent(ecuFlashPath)
                         		.addComponent(btnEcuFlashPath)
                                 )
                                 .addContainerGap())
@@ -621,7 +622,7 @@ public class SettingsForm extends JFrame implements MouseListener {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(lblEcuFlashPath)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(EcuFlashPath)
+                        .addComponent(ecuFlashPath)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(btnEcuFlashPath)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -1064,11 +1065,12 @@ public class SettingsForm extends JFrame implements MouseListener {
     }
     
     public void updateEcuFlashPath() {
-    	EcuFlashPath.setText(fileNames);
+    	ecuFlashPath.setText(fileNames);
     }
 
     public void applySettings() {
         try {
+        	System.out.println("Settings applied");
             Integer.parseInt(cellHeight.getText());
         } catch (NumberFormatException ex) {
             // number formatted improperly, reset
@@ -1101,6 +1103,7 @@ public class SettingsForm extends JFrame implements MouseListener {
         getSettings().setDisplayHighTables(displayHighTables.isSelected());
         getSettings().setSaveDebugTables(saveDebugTables.isSelected());
         getSettings().setDebug(debug.isSelected());
+        getSettings().setEcuFlashPath(ecuFlashPath.getText());
         getSettings().setOpenExpanded(chckbxOpenRomNode.isSelected());
         getSettings().setAlwaysOpenTableAtZero(chckbxOpenTablesAt.isSelected());
         getSettings().setShowTableToolbarBorder(chckbxShowTableToolbar.isSelected());
@@ -1290,7 +1293,7 @@ public class SettingsForm extends JFrame implements MouseListener {
     private javax.swing.JCheckBox cbScaleHeaderAndData;
     private javax.swing.JCheckBox localeFormatCheckBox;
     private String oldLocale;
-    private javax.swing.JTextField EcuFlashPath;
+    private javax.swing.JTextField ecuFlashPath;
     private javax.swing.JLabel lblEcuFlashPath;
     private javax.swing.JButton btnEcuFlashPath;
 }

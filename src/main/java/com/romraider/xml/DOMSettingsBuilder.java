@@ -131,13 +131,13 @@ public final class DOMSettingsBuilder {
 
     private IIOMetadataNode buildOptions(Settings settings, String versionNumber) {
         IIOMetadataNode options = new IIOMetadataNode("options");
-
+        
         // obsolete warning
         IIOMetadataNode obsoleteWarning = new IIOMetadataNode("obsoletewarning");
         obsoleteWarning.setAttribute("value", String.valueOf(settings.isObsoleteWarning()));
         options.appendChild(obsoleteWarning);
 
-        // calcultion conflicting warning
+        // calculation conflicting warning
         IIOMetadataNode calcConflictWarning = new IIOMetadataNode("calcconflictwarning");
         calcConflictWarning.setAttribute("value", String.valueOf(settings.isCalcConflictWarning()));
         options.appendChild(calcConflictWarning);
@@ -146,6 +146,11 @@ public final class DOMSettingsBuilder {
         IIOMetadataNode debug = new IIOMetadataNode("debug");
         debug.setAttribute("value", String.valueOf(settings.isDebug()));
         options.appendChild(debug);
+
+        //EcuFlash path
+        IIOMetadataNode ecuFlashPath = new IIOMetadataNode("ecuflash_path");
+        ecuFlashPath.setAttribute("value", String.valueOf(settings.getEcuFlashPath()));
+        options.appendChild(ecuFlashPath);
 
         // userlevel
         IIOMetadataNode userLevel = new IIOMetadataNode("userlevel");

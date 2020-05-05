@@ -50,12 +50,14 @@ public class SettingsManager {
 
     public static Settings getSettings() {
         if(null == settings) {
+        	System.out.println("Hit null");
             settings = load();
         }
         return settings;
     }
 
     private static Settings load() {
+    	System.out.println("Loading settings...");
         Settings loadedSettings;
         try {
             FileInputStream settingsFileIn = null;
@@ -65,6 +67,7 @@ public class SettingsManager {
                 settingsDir = START_DIR;
             }
             else {
+            	System.out.println("ELSE");
                 sf = new File(USER_HOME + SETTINGS_FILE);
                 settingsFileIn = new FileInputStream(sf);
             }
@@ -91,14 +94,17 @@ public class SettingsManager {
     }
 
     public static void save(Settings newSettings, JProgressPane progress) {
+    	System.out.println("Initial check during the saving function " + settings.getEcuFlashPath());
         final DOMSettingsBuilder builder = new DOMSettingsBuilder();
         try {
+        	System.out.println("New file being made");
             final File newDir = new File(settingsDir);
             newDir.mkdir();     // Creates directory if it does not exist
             final File sf = new File(settingsDir + SETTINGS_FILE);
             builder.buildSettings(newSettings, sf, progress, VERSION);
             settings = newSettings;
         } catch (Exception e) {
+        	System.out.println("Reading settings");
             // Load the settings from disk.
             settings = load();
             throw new RuntimeException(e);

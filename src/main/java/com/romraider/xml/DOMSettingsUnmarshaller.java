@@ -132,6 +132,9 @@ public final class DOMSettingsUnmarshaller {
 
             } else if (n.getNodeType() == ELEMENT_NODE && n.getNodeName().equalsIgnoreCase("debug")) {
                 settings.setDebug(Boolean.parseBoolean(unmarshallAttribute(n, "value", "true")));
+                
+            } else if (n.getNodeType() == ELEMENT_NODE && n.getNodeName().equalsIgnoreCase("ecuflash_path")) {
+                settings.setEcuFlashPath(unmarshallAttribute(n, "path", "ettetet"));
 
             } else if (n.getNodeType() == ELEMENT_NODE && n.getNodeName().equalsIgnoreCase("calcconflictwarning")) {
                 settings.setCalcConflictWarning(Boolean.parseBoolean(unmarshallAttribute(n, "value", "true")));

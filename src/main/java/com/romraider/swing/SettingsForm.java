@@ -114,7 +114,6 @@ public class SettingsForm extends JFrame implements MouseListener {
         liveValueColor.setToolTipText(rb.getString("CLROVERLAYV"));
         curLiveValueColor.setBackground(settings.getCurLiveValueColor());
         curLiveValueColor.setToolTipText(rb.getString("CLROVERLAYLIVE"));
-        System.out.println("Loc:" + settings.getEcuFlashPath());
         ecuFlashPath.setText(settings.getEcuFlashPath());
         cellWidth.setText(((int) settings.getCellSize().getWidth()) + "");
         cellHeight.setText(((int) settings.getCellSize().getHeight()) + "");
@@ -961,9 +960,7 @@ public class SettingsForm extends JFrame implements MouseListener {
                 warningColor.setBackground(color);
             }
         } else if (e.getSource() == btnEcuFlashPath) {
-            //Open path window for lookup
         	openPath();
-        	System.out.println("Button Clicked");
         }  else if (e.getSource() == btnApply) {
             applySettings();
         } else if (e.getSource() == btnOk) {
@@ -1070,7 +1067,6 @@ public class SettingsForm extends JFrame implements MouseListener {
 
     public void applySettings() {
         try {
-        	System.out.println("Settings applied");
             Integer.parseInt(cellHeight.getText());
         } catch (NumberFormatException ex) {
             // number formatted improperly, reset
@@ -1103,7 +1099,11 @@ public class SettingsForm extends JFrame implements MouseListener {
         getSettings().setDisplayHighTables(displayHighTables.isSelected());
         getSettings().setSaveDebugTables(saveDebugTables.isSelected());
         getSettings().setDebug(debug.isSelected());
+        
+        /* Save EcuFlash Path */
+        System.out.println("Saving..." + ecuFlashPath.getText());
         getSettings().setEcuFlashPath(ecuFlashPath.getText());
+        System.out.println("Saved" + ecuFlashPath.getText());
         getSettings().setOpenExpanded(chckbxOpenRomNode.isSelected());
         getSettings().setAlwaysOpenTableAtZero(chckbxOpenTablesAt.isSelected());
         getSettings().setShowTableToolbarBorder(chckbxShowTableToolbar.isSelected());

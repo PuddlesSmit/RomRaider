@@ -121,6 +121,7 @@ public class ECUEditor extends AbstractFrame {
 
     public ECUEditor() {
         Settings settings = SettingsManager.getSettings();
+        System.out.println("Checking settings... " + settings.getEcuFlashPath());
         if (!settings.getRecentVersion().equalsIgnoreCase(VERSION)) {
             showReleaseNotes();
         }
@@ -242,13 +243,16 @@ public class ECUEditor extends AbstractFrame {
 
     public void handleExit() {
         Settings settings = SettingsManager.getSettings();
+        System.out.println("Initial exit check " + settings.getEcuFlashPath());
         settings.setSplitPaneLocation(splitPane.getDividerLocation());
         settings.setWindowMaximized(getExtendedState() == MAXIMIZED_BOTH);
         settings.setWindowSize(getSize());
         settings.setWindowLocation(getLocation());
 
         // Save when exit to save file settings.
+        System.out.println("Check before saving settings " + settings.getEcuFlashPath());
         SettingsManager.save(settings, statusPanel);
+        System.out.println("Check after saving settings " + settings.getEcuFlashPath());
         statusPanel.update(rb.getString("STATUSREADY"), 0);
         repaint();
     }

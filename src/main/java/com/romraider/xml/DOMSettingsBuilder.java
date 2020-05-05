@@ -149,10 +149,10 @@ public final class DOMSettingsBuilder {
 
         //EcuFlash path
         IIOMetadataNode ecuFlashPath = new IIOMetadataNode("ecuflash_path");
-        ecuFlashPath.setAttribute("value", String.valueOf(settings.getEcuFlashPath()));
+        ecuFlashPath.setAttribute("path", String.valueOf(settings.getEcuFlashPath()));
         options.appendChild(ecuFlashPath);
 
-        // userlevel
+        // user level
         IIOMetadataNode userLevel = new IIOMetadataNode("userlevel");
         userLevel.setAttribute("value", String.valueOf(settings.getUserLevel()));
         options.appendChild(userLevel);

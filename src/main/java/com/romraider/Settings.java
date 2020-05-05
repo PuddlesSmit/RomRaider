@@ -182,7 +182,7 @@ public class Settings implements Serializable {
     private boolean obsoleteWarning = true;
     private boolean calcConflictWarning = true;
     private boolean debug;
-    private static String ecuFlashPath;
+    private String ecuFlashPath = "";
     private int userLevel = 1;
     private boolean saveDebugTables = true;
     private boolean displayHighTables = true;
@@ -369,7 +369,7 @@ public class Settings implements Serializable {
     }
     
     public void setEcuFlashPath(String value) {
-        Settings.ecuFlashPath = value;
+        this.ecuFlashPath = value;
     }
     
     public boolean isObsoleteWarning() {

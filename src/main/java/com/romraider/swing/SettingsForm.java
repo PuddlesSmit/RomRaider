@@ -1101,9 +1101,7 @@ public class SettingsForm extends JFrame implements MouseListener {
         getSettings().setDebug(debug.isSelected());
         
         /* Save EcuFlash Path */
-        System.out.println("Saving..." + ecuFlashPath.getText());
         getSettings().setEcuFlashPath(ecuFlashPath.getText());
-        System.out.println("Saved" + ecuFlashPath.getText());
         getSettings().setOpenExpanded(chckbxOpenRomNode.isSelected());
         getSettings().setAlwaysOpenTableAtZero(chckbxOpenTablesAt.isSelected());
         getSettings().setShowTableToolbarBorder(chckbxShowTableToolbar.isSelected());

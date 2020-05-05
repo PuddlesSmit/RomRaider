@@ -39,6 +39,7 @@ import javax.swing.JToolBar;
 import com.romraider.Settings;
 import com.romraider.editor.ecu.ECUEditor;
 import com.romraider.editor.ecu.ECUEditorManager;
+import com.romraider.maps.Rom;
 import com.romraider.util.ResourceUtil;
 import com.romraider.util.SettingsManager;
 
@@ -168,11 +169,13 @@ public class ECUEditorToolBar extends JToolBar implements ActionListener {
             }
         }
         else if (e.getSource() == openEcuFlash) {
-        	 try
+        	String selectedRomLocation = new String(getSettings().getLastImageDir().getPath() + "\\" + ECUEditorManager.getECUEditor().getLastSelectedRom().getFileName());
+        	try
              { 
-                 String command = getSettings().getEcuFlashPath();
-                 Runtime run  = Runtime.getRuntime(); 
-                 Process proc = run.exec(command); 
+        		String command = getSettings().getEcuFlashPath();
+                Runtime run  = Runtime.getRuntime(); 
+                ProcessBuilder proc = new ProcessBuilder(command, selectedRomLocation);
+                proc.start();
              } 
              catch (IOException e1) 
              { 

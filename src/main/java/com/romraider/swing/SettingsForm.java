@@ -70,7 +70,6 @@ public class SettingsForm extends JFrame implements MouseListener {
         curLiveValueColor.addMouseListener(this);
         
         btnEcuFlashPath.addMouseListener(this);
-
         btnOk.addMouseListener(this);
         btnApply.addMouseListener(this);
         btnCancel.addMouseListener(this);
@@ -102,6 +101,7 @@ public class SettingsForm extends JFrame implements MouseListener {
         displayHighTables.setSelected(settings.isDisplayHighTables());
         saveDebugTables.setSelected(settings.isSaveDebugTables());
         debug.setSelected(settings.isDebug());
+        ecuFlashPath.setText(settings.getEcuFlashPath());
 
         maxColor.setBackground(settings.getMaxColor());
         minColor.setBackground(settings.getMinColor());
@@ -114,7 +114,6 @@ public class SettingsForm extends JFrame implements MouseListener {
         liveValueColor.setToolTipText(rb.getString("CLROVERLAYV"));
         curLiveValueColor.setBackground(settings.getCurLiveValueColor());
         curLiveValueColor.setToolTipText(rb.getString("CLROVERLAYLIVE"));
-        ecuFlashPath.setText(settings.getEcuFlashPath());
         cellWidth.setText(((int) settings.getCellSize().getWidth()) + "");
         cellHeight.setText(((int) settings.getCellSize().getHeight()) + "");
 
@@ -601,10 +600,10 @@ public class SettingsForm extends JFrame implements MouseListener {
                                 .addComponent(calcConflictWarning)
                                 .addComponent(localeFormatCheckBox)
                                 .addComponent(debug)
+                                .addGroup(jPanelDefaultLayout.createSequentialGroup()
                                 .addComponent(lblEcuFlashPath)
                         		.addComponent(ecuFlashPath)
-                        		.addComponent(btnEcuFlashPath)
-                                )
+                        		.addComponent(btnEcuFlashPath)))
                                 .addContainerGap())
                 );
         jPanelDefaultLayout.setVerticalGroup(
@@ -619,11 +618,12 @@ public class SettingsForm extends JFrame implements MouseListener {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(debug)
                         .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(lblEcuFlashPath)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(ecuFlashPath)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(btnEcuFlashPath)
+                        .addGroup(jPanelDefaultLayout.createParallelGroup(Alignment.CENTER)
+                        		.addComponent(lblEcuFlashPath)
+                                .addComponent(ecuFlashPath)
+                                .addComponent(btnEcuFlashPath)
+                        		)
+                        
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(panelUISettings, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(267, Short.MAX_VALUE))
@@ -1053,7 +1053,7 @@ public class SettingsForm extends JFrame implements MouseListener {
     }
     
     public void openPath() {
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser("C:/");
 
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             fileNames = fc.getSelectedFile().getAbsolutePath();
